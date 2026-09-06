@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { SpeedInsights } from "@vercel/speed-insights/react";
 import GridCanvas from "./components/GridCanvas";
 import Gallery from "./components/Gallery";
 import DetailView from "./components/DetailView";
@@ -117,6 +118,8 @@ export default function App() {
       {detail !== null && (
         <DetailView art={artworks[detail]} onClose={() => setDetail(null)} />
       )}
+
+      <SpeedInsights />
     </div>
   );
 }
