@@ -92,7 +92,7 @@ export default function App() {
         />
       </main>
 
-      <footer className="relative z-10 flex shrink-0 items-center justify-between px-8 pb-5 text-sm text-muted">
+      <footer className="relative z-10 flex shrink-0 flex-col items-center gap-1 px-8 pb-5 text-center text-xs text-muted sm:flex-row sm:justify-between sm:text-left sm:text-sm">
         <span>
           <span className="text-accent">$</span> commissions: hit my DMs if you're interested_
         </span>

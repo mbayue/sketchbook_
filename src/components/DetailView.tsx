@@ -44,22 +44,26 @@ export default function DetailView({ art, onClose }: DetailViewProps) {
 
   return (
     <div
-      className="fixed inset-0 z-30 flex cursor-pointer flex-col items-center justify-center"
+      className="fixed inset-0 z-30 flex cursor-pointer flex-col items-center justify-center px-4"
       onClick={onClose}
       role="button"
       aria-label="Close detail view"
     >
-      <p className="mb-4 text-sm text-muted">
+      <p className="mb-3 text-center text-xs text-muted sm:mb-4 sm:text-sm">
         [<span className="text-accent">{art.id}</span>] {art.title} —{" "}
         {art.caption ?? "timelapse reveal"}
       </p>
 
       <div
-        className="relative cursor-default border border-edge bg-white p-3 shadow-2xl"
+        className="relative cursor-default border border-edge bg-white p-2 shadow-2xl sm:p-3"
         onClick={(e) => e.stopPropagation()}
       >
         <div className="relative">
-          <img src={art.color} alt="" className="block max-h-[68vh] w-auto" />
+          <img
+            src={art.color}
+            alt=""
+            className="block max-h-[48vh] w-auto sm:max-h-[68vh]"
+          />
           {progress < 100 && (
             <img
               src={art.line}
@@ -91,7 +95,9 @@ export default function DetailView({ art, onClose }: DetailViewProps) {
         </div>
       </div>
 
-      <p className="mt-4 text-sm text-muted">[click blank section to go back]</p>
+      <p className="mt-3 text-center text-xs text-muted sm:mt-4 sm:text-sm">
+        [click blank section to go back]
+      </p>
     </div>
   );
 }
