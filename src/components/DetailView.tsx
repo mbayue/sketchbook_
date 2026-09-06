@@ -44,7 +44,7 @@ export default function DetailView({ art, onClose }: DetailViewProps) {
 
   return (
     <div
-      className="fixed inset-0 z-30 flex cursor-pointer flex-col items-center justify-center bg-paper/95 px-4 backdrop-blur-sm sm:bg-transparent sm:px-4 sm:backdrop-blur-none"
+      className="fixed inset-0 z-30 flex cursor-pointer flex-col items-center justify-start px-4 pt-60 sm:justify-center sm:pt-0"
       onClick={onClose}
       role="button"
       aria-label="Close detail view"
