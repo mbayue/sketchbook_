@@ -29,7 +29,7 @@ export const artworks: Artwork[] = [
   { id: "archive-01", title: "vendela", caption: "arknights", line: vendelaLine, color: vendelaColor },
   { id: "archive-02", title: "virtuosa", caption: "arknights", line: virtuosaLine, color: virtuosaColor },
   { id: "archive-03", title: "fluorite", caption: "arknights: endfield", line: fluoriteLine, color: fluoriteColor },
-  { id: "archive-04", title: "rockrock", caption: "rockrock", line: rockrockLine, color: rockrockColor },
+  { id: "archive-04", title: "rockrock", caption: "arknights", line: rockrockLine, color: rockrockColor },
   { id: "archive-05", title: "shu", caption: "arknights", line: shuLine, color: shuColor },
   { id: "archive-06", title: "dusk", caption: "arknights", line: duskLine, color: duskColor },
   { id: "archive-07", title: "suzuran", caption: "arknights", line: suzuranLine, color: suzuranColor },
