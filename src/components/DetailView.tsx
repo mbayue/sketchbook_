@@ -102,6 +102,8 @@ export default function DetailView({ art, onClose }: DetailViewProps) {
           <img
             src={art.color}
             alt={art.title}
+            width={art.colorWidth}
+            height={art.colorHeight}
             className="block max-h-[48vh] w-auto sm:max-h-[68vh]"
           />
           {progress < 100 && (
@@ -129,7 +131,7 @@ export default function DetailView({ art, onClose }: DetailViewProps) {
               style={{ width: `${progress}%` }}
             />
           </div>
-          <span className="text-xs text-muted">{Math.round(progress)}%</span>
+          <span className="text-xs tabular-nums text-muted">{Math.round(progress)}%</span>
           <button
             type="button"
             aria-label={playing ? "Pause reveal" : "Resume reveal"}

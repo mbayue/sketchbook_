@@ -31,7 +31,7 @@ export default function Gallery({
   }, []);
 
   return (
-    <section className="relative z-10 flex h-full items-center">
+    <section id="gallery" className="relative z-10 flex h-full items-center">
       <div
         ref={rowRef}
         role="region"
@@ -46,7 +46,7 @@ export default function Gallery({
             onClick={() => onSelect(i)}
             onMouseEnter={() => onHover(i)}
             onMouseLeave={onLeave}
-            className="group shrink-0 border border-edge bg-card p-2 shadow-sm transition-[transform,box-shadow] duration-300 hover:-translate-y-2 hover:shadow-xl focus:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+            className="group shrink-0 border border-edge bg-card p-2 shadow-sm transition-[box-shadow] duration-300 hover:shadow-xl focus:outline-none focus-visible:ring-2 focus-visible:ring-accent"
             aria-label={`Open ${art.title}`}
           >
             <img
@@ -56,10 +56,10 @@ export default function Gallery({
               height={art.height}
               loading={i === 0 ? "eager" : "lazy"}
               draggable={false}
-              className="block h-[min(58vh,620px)] w-auto select-none"
+              className="block h-[min(58vh,620px)] w-auto select-none transition-transform duration-300 group-hover:-translate-y-2"
             />
             <span className="mt-2 flex items-center justify-between px-1 pb-1 text-xs text-muted">
-              <span>{art.id}</span>
+              <span translate="no">{art.id}</span>
               <span className="text-accent opacity-0 transition-opacity group-hover:opacity-100 group-focus-within:opacity-100">
                 $ open
               </span>

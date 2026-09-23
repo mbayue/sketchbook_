@@ -9,29 +9,43 @@ export default function App() {
   const [hovered, setHovered] = useState<number | null>(null); // index | null
 
   const preview = hovered !== null ? artworks[hovered] : null;
+  // when a piece is open, its own colors wash the background like the hover preview
+  const backdrop = detail !== null ? artworks[detail] : preview;
 
   return (
     <div className="relative flex h-screen flex-col overflow-hidden">
-      {/* full-color preview of the hovered card, blurred behind the grid */}
-      {preview && (
+      <a
+        href="#gallery"
+        className="sr-only z-50 border border-edge bg-card px-4 py-2 text-sm focus:not-sr-only focus:absolute focus:top-2 focus:left-2"
+      >
+        Skip to gallery
+      </a>
+      {/* full-color wash behind the grid: hovered card, or the open piece */}
+      {backdrop && (
         <img
-          key={preview.id}
-          src={preview.color}
+          key={backdrop.id}
+          src={backdrop.color}
           alt=""
+          aria-hidden="true"
           className="pointer-events-none fixed inset-0 z-0 h-full w-full object-cover object-[50%_40%] opacity-30 transition-opacity duration-500"
         />
       )}
 
       <GridCanvas />
 
-      <header className="relative z-10 shrink-0 px-8 pt-6" inert={detail !== null}>
+      <header
+        className={`relative z-10 shrink-0 px-8 pt-6 ${
+          detail !== null ? "invisible" : ""
+        }`}
+        inert={detail !== null}
+      >
         <div className="flex items-start justify-between">
           <div>
             <p className="text-sm text-muted">
               <span className="text-accent">$</span> cat ./sketchbook.txt
             </p>
-            <h1 className="mt-1 text-3xl font-bold tracking-tight">
-              sketchbook<span className="text-accent">_</span>
+            <h1 translate="no" className="mt-1 text-3xl font-bold tracking-tight">
+              TabOjisan&apos;s sketchbook<span className="text-accent">_</span>
             </h1>
             <p className="mt-1 text-sm text-muted">
               lineart archive — open a piece to watch the timelapse
@@ -39,6 +53,7 @@ export default function App() {
           </div>
 
           <div className="flex gap-2 pt-1">
+            {/*
             <a
               href="mailto:you@example.com?subject=Commission%20Inquiry%20-%20%5BYour%20Name%5D"
               aria-label="Email"
@@ -49,20 +64,21 @@ export default function App() {
                 <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4-8 5-8-5V6l8 5 8-5v2z" />
               </svg>
             </a>
+            */}
             <a
-              href="https://facebook.com/yourname"
+              href="https://www.pixiv.net/en/users/40589627"
               target="_blank"
               rel="noreferrer"
-              aria-label="Facebook"
-              title="Facebook"
+              aria-label="Pixiv"
+              title="Pixiv"
               className="flex h-10 w-10 items-center justify-center border border-edge bg-card text-muted shadow-sm transition-colors hover:bg-edge/40 hover:text-ink"
             >
               <svg viewBox="0 0 24 24" className="h-5 w-5" fill="currentColor" aria-hidden="true">
-                <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
+                <path d="M4.94 0A4.953 4.953 0 0 0 0 4.94v14.12A4.953 4.953 0 0 0 4.94 24h14.12A4.953 4.953 0 0 0 24 19.06c-.014 1.355 0-14.12 0-14.12A4.953 4.953 0 0 0 19.06 0Zm1.783 5.465h.904a.37.37 0 0 1 .31.17l.752 1.17a6.172 6.172 0 0 1 10.01 4.834 6.172 6.172 0 0 1-9.394 5.265v2.016a.37.37 0 0 1-.37.367H6.724a.37.37 0 0 1-.37-.367V5.834a.37.37 0 0 1 .37-.37m5.804 2.951a3.222 3.222 0 1 0-.002 6.443 3.222 3.222 0 1 0 .002-6.443" />
               </svg>
             </a>
             <a
-              href="https://x.com/yourname"
+              href="https://x.com/TabOjisan"
               target="_blank"
               rel="noreferrer"
               aria-label="X (Twitter)"
@@ -91,9 +107,23 @@ export default function App() {
         />
       </main>
 
-      <footer inert={detail !== null} className="relative z-10 flex shrink-0 flex-col items-center gap-1 px-8 pb-5 text-center text-xs text-muted sm:flex-row sm:justify-between sm:text-left sm:text-sm">
+      <footer
+        inert={detail !== null}
+        className={`relative z-10 flex shrink-0 flex-col items-center gap-1 px-8 pb-5 text-center text-xs text-muted sm:flex-row sm:justify-between sm:text-left sm:text-sm ${
+          detail !== null ? "invisible" : ""
+        }`}
+      >
         <span>
-          <span className="text-accent">$</span> commissions: hit my DMs if you're interested_
+          <span className="text-accent">$</span> commissions:{" "}
+          <a
+            href="https://tbhdbnb.fanbox.cc"
+            target="_blank"
+            rel="noreferrer"
+            className="underline decoration-edge underline-offset-2 transition-colors hover:text-ink"
+          >
+            support me on fanbox
+          </a>
+          _
         </span>
         <span className="flex items-center gap-2">
           <a
@@ -102,7 +132,8 @@ export default function App() {
             rel="noreferrer"
             className="transition-colors hover:text-ink"
           >
-            art by <span className="text-accent">@TabOjisan</span>
+            © {new Intl.DateTimeFormat(undefined, { year: "numeric" }).format(new Date())}{" "}
+            <span className="text-accent">@TabOjisan</span>
           </a>
           <a
             href="https://github.com/mbayue"
@@ -110,7 +141,7 @@ export default function App() {
             rel="noreferrer"
             className="transition-colors hover:text-ink"
           >
-            © {new Date().getFullYear()} mbayue
+            built by mbayue
           </a>
         </span>
       </footer>
