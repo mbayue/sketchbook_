@@ -30,8 +30,8 @@ export interface Artwork {
 }
 
 export const artworks: Artwork[] = [
-  { id: "archive-01", title: "vendela", caption: "arknights", line: vendelaLine, color: vendelaColor, width: 959, height: 1280, colorWidth: 959, colorHeight: 1280 },
-  { id: "archive-02", title: "virtuosa", caption: "arknights", line: virtuosaLine, color: virtuosaColor, width: 896, height: 1280, colorWidth: 889, colorHeight: 1280 },
+  { id: "archive-01", title: "virtuosa", caption: "arknights", line: virtuosaLine, color: virtuosaColor, width: 896, height: 1280, colorWidth: 889, colorHeight: 1280 },
+  { id: "archive-02", title: "vendela", caption: "arknights", line: vendelaLine, color: vendelaColor, width: 959, height: 1280, colorWidth: 959, colorHeight: 1280 },
   { id: "archive-03", title: "fluorite", caption: "arknights: endfield", line: fluoriteLine, color: fluoriteColor, width: 910, height: 1280, colorWidth: 910, colorHeight: 1280 },
   { id: "archive-04", title: "rockrock", caption: "arknights", line: rockrockLine, color: rockrockColor, width: 959, height: 1280, colorWidth: 959, colorHeight: 1280 },
   { id: "archive-05", title: "shu", caption: "arknights", line: shuLine, color: shuColor, width: 896, height: 1280, colorWidth: 896, colorHeight: 1280 },
