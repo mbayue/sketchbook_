@@ -16,6 +16,7 @@ export default function DetailView({ art, onClose }: DetailViewProps) {
   const [progress, setProgress] = useState(0); // 0..100
   const [playing, setPlaying] = useState(true);
   const panelRef = useRef<HTMLDivElement | null>(null);
+  const elapsedRef = useRef(0); // ms of reveal already banked before this run
 
   // move focus into the dialog on open, restore it on close
   useEffect(() => {
@@ -23,6 +24,12 @@ export default function DetailView({ art, onClose }: DetailViewProps) {
     panelRef.current?.focus();
     return () => prev?.focus();
   }, []);
+
+  useEffect(() => {
+    elapsedRef.current = 0;
+    setProgress(0);
+    setPlaying(true);
+  }, [art]);
 
   // Escape closes
   useEffect(() => {
@@ -34,23 +41,31 @@ export default function DetailView({ art, onClose }: DetailViewProps) {
   }, [onClose]);
 
   useEffect(() => {
-    setProgress(0);
-    setPlaying(true);
-  }, [art]);
-
-  useEffect(() => {
     if (!playing) return;
     let raf = 0;
     const start = performance.now();
     const tick = (t: number) => {
-      const k = Math.min((t - start) / DURATION_MS, 1);
+      const k = Math.min(
+        (elapsedRef.current + (t - start)) / DURATION_MS,
+        1
+      );
       const eased = k < 0.5 ? 2 * k * k : 1 - Math.pow(-2 * k + 2, 2) / 2;
       setProgress(eased * 100);
-      if (k < 1) raf = requestAnimationFrame(tick);
-      else setPlaying(false);
+      if (k < 1) {
+        raf = requestAnimationFrame(tick);
+      } else {
+        elapsedRef.current = 0;
+        setPlaying(false);
+      }
     };
     raf = requestAnimationFrame(tick);
-    return () => cancelAnimationFrame(raf);
+    return () => {
+      cancelAnimationFrame(raf);
+      elapsedRef.current = Math.min(
+        elapsedRef.current + (performance.now() - start),
+        DURATION_MS
+      );
+    };
   }, [playing, art]);
 
   // mask: black = lineart visible, transparent = color shows through
@@ -117,8 +132,17 @@ export default function DetailView({ art, onClose }: DetailViewProps) {
           <span className="text-xs text-muted">{Math.round(progress)}%</span>
           <button
             type="button"
+            aria-label={playing ? "Pause reveal" : "Resume reveal"}
+            className="border border-edge px-2 py-0.5 text-xs text-ink hover:bg-edge/40"
+            onClick={() => setPlaying((p) => !p)}
+          >
+            {playing ? "$ pause" : "$ play"}
+          </button>
+          <button
+            type="button"
             className="border border-edge px-2 py-0.5 text-xs text-ink hover:bg-edge/40"
             onClick={() => {
+              elapsedRef.current = 0;
               setProgress(0);
               setPlaying(true);
             }}

@@ -79,7 +79,7 @@ export default function App() {
 
       <main
         inert={detail !== null}
-        className={`relative min-h-0 flex-1 transition-all duration-500 ${
+        className={`relative min-h-0 flex-1 transition-[opacity,filter] duration-500 ${
           detail !== null ? "pointer-events-none blur-md opacity-40" : ""
         }`}
       >

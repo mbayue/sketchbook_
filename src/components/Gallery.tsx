@@ -46,18 +46,21 @@ export default function Gallery({
             onClick={() => onSelect(i)}
             onMouseEnter={() => onHover(i)}
             onMouseLeave={onLeave}
-            className="group shrink-0 border border-edge bg-card p-2 shadow-sm transition-all duration-300 hover:-translate-y-2 hover:shadow-xl focus:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+            className="group shrink-0 border border-edge bg-card p-2 shadow-sm transition-[transform,box-shadow] duration-300 hover:-translate-y-2 hover:shadow-xl focus:outline-none focus-visible:ring-2 focus-visible:ring-accent"
             aria-label={`Open ${art.title}`}
           >
             <img
               src={art.line}
               alt={art.title}
+              width={art.width}
+              height={art.height}
+              loading={i === 0 ? "eager" : "lazy"}
               draggable={false}
               className="block h-[min(58vh,620px)] w-auto select-none"
             />
             <span className="mt-2 flex items-center justify-between px-1 pb-1 text-xs text-muted">
               <span>{art.id}</span>
-              <span className="text-accent opacity-0 transition-opacity group-hover:opacity-100">
+              <span className="text-accent opacity-0 transition-opacity group-hover:opacity-100 group-focus-within:opacity-100">
                 $ open
               </span>
             </span>

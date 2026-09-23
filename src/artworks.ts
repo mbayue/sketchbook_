@@ -23,16 +23,18 @@ export interface Artwork {
   caption?: string;
   line: string;
   color: string;
+  width: number;
+  height: number;
 }
 
 export const artworks: Artwork[] = [
-  { id: "archive-01", title: "vendela", caption: "arknights", line: vendelaLine, color: vendelaColor },
-  { id: "archive-02", title: "virtuosa", caption: "arknights", line: virtuosaLine, color: virtuosaColor },
-  { id: "archive-03", title: "fluorite", caption: "arknights: endfield", line: fluoriteLine, color: fluoriteColor },
-  { id: "archive-04", title: "rockrock", caption: "arknights", line: rockrockLine, color: rockrockColor },
-  { id: "archive-05", title: "shu", caption: "arknights", line: shuLine, color: shuColor },
-  { id: "archive-06", title: "dusk", caption: "arknights", line: duskLine, color: duskColor },
-  { id: "archive-07", title: "suzuran", caption: "arknights", line: suzuranLine, color: suzuranColor },
-  { id: "archive-08", title: "blemishine", caption: "arknights", line: blemishineLine, color: blemishineColor },
-  { id: "archive-09", title: "angelina", caption: "arknights", line: angelinaLine, color: angelinaColor },
+  { id: "archive-01", title: "vendela", caption: "arknights", line: vendelaLine, color: vendelaColor, width: 959, height: 1280 },
+  { id: "archive-02", title: "virtuosa", caption: "arknights", line: virtuosaLine, color: virtuosaColor, width: 896, height: 1280 },
+  { id: "archive-03", title: "fluorite", caption: "arknights: endfield", line: fluoriteLine, color: fluoriteColor, width: 910, height: 1280 },
+  { id: "archive-04", title: "rockrock", caption: "arknights", line: rockrockLine, color: rockrockColor, width: 959, height: 1280 },
+  { id: "archive-05", title: "shu", caption: "arknights", line: shuLine, color: shuColor, width: 896, height: 1280 },
+  { id: "archive-06", title: "dusk", caption: "arknights", line: duskLine, color: duskColor, width: 861, height: 1280 },
+  { id: "archive-07", title: "suzuran", caption: "arknights", line: suzuranLine, color: suzuranColor, width: 959, height: 1280 },
+  { id: "archive-08", title: "blemishine", caption: "arknights", line: blemishineLine, color: blemishineColor, width: 959, height: 1280 },
+  { id: "archive-09", title: "angelina", caption: "arknights", line: angelinaLine, color: angelinaColor, width: 959, height: 1280 },
 ];
