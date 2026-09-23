@@ -1,6 +1,4 @@
 import { useState } from "react";
-import { SpeedInsights } from "@vercel/speed-insights/react";
-import { Analytics } from "@vercel/analytics/react";
 import GridCanvas from "./components/GridCanvas";
 import Gallery from "./components/Gallery";
 import DetailView from "./components/DetailView";
@@ -26,7 +24,7 @@ export default function App() {
 
       <GridCanvas />
 
-      <header className="relative z-10 shrink-0 px-8 pt-6">
+      <header className="relative z-10 shrink-0 px-8 pt-6" inert={detail !== null}>
         <div className="flex items-start justify-between">
           <div>
             <p className="text-sm text-muted">
@@ -80,6 +78,7 @@ export default function App() {
       </header>
 
       <main
+        inert={detail !== null}
         className={`relative min-h-0 flex-1 transition-all duration-500 ${
           detail !== null ? "pointer-events-none blur-md opacity-40" : ""
         }`}
@@ -92,7 +91,7 @@ export default function App() {
         />
       </main>
 
-      <footer className="relative z-10 flex shrink-0 flex-col items-center gap-1 px-8 pb-5 text-center text-xs text-muted sm:flex-row sm:justify-between sm:text-left sm:text-sm">
+      <footer inert={detail !== null} className="relative z-10 flex shrink-0 flex-col items-center gap-1 px-8 pb-5 text-center text-xs text-muted sm:flex-row sm:justify-between sm:text-left sm:text-sm">
         <span>
           <span className="text-accent">$</span> commissions: hit my DMs if you're interested_
         </span>
@@ -120,8 +119,6 @@ export default function App() {
         <DetailView art={artworks[detail]} onClose={() => setDetail(null)} />
       )}
 
-      <SpeedInsights />
-      <Analytics />
     </div>
   );
 }

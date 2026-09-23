@@ -22,6 +22,7 @@ export default function Gallery({
     if (!el) return;
     const onWheel = (e: WheelEvent) => {
       if (e.deltaY === 0) return;
+      if (e.ctrlKey || e.metaKey) return; // let pinch-zoom reach the browser
       e.preventDefault();
       el.scrollLeft += e.deltaY;
     };
@@ -33,6 +34,9 @@ export default function Gallery({
     <section className="relative z-10 flex h-full items-center">
       <div
         ref={rowRef}
+        role="region"
+        aria-label="Artwork archive, scroll horizontally"
+        tabIndex={0}
         className="no-scrollbar flex w-full items-center gap-5 overflow-x-auto px-8 py-4"
       >
         {artworks.map((art, i) => (

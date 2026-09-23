@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import type { Artwork } from "../artworks";
 
 const DURATION_MS = 7000;
@@ -15,6 +15,23 @@ interface DetailViewProps {
 export default function DetailView({ art, onClose }: DetailViewProps) {
   const [progress, setProgress] = useState(0); // 0..100
   const [playing, setPlaying] = useState(true);
+  const panelRef = useRef<HTMLDivElement | null>(null);
+
+  // move focus into the dialog on open, restore it on close
+  useEffect(() => {
+    const prev = document.activeElement as HTMLElement | null;
+    panelRef.current?.focus();
+    return () => prev?.focus();
+  }, []);
+
+  // Escape closes
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") onClose();
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [onClose]);
 
   useEffect(() => {
     setProgress(0);
@@ -44,10 +61,18 @@ export default function DetailView({ art, onClose }: DetailViewProps) {
 
   return (
     <div
+      ref={panelRef}
       className="fixed inset-0 z-30 flex cursor-pointer flex-col items-center justify-start px-4 pt-60 sm:justify-center sm:pt-0"
       onClick={onClose}
       role="button"
+      tabIndex={0}
       aria-label="Close detail view"
+      onKeyDown={(e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          onClose();
+        }
+      }}
     >
       <p className="mb-3 text-center text-xs text-muted sm:mb-4 sm:text-sm">
         [<span className="text-accent">{art.id}</span>] {art.title} —{" "}
@@ -61,13 +86,14 @@ export default function DetailView({ art, onClose }: DetailViewProps) {
         <div className="relative">
           <img
             src={art.color}
-            alt=""
+            alt={art.title}
             className="block max-h-[48vh] w-auto sm:max-h-[68vh]"
           />
           {progress < 100 && (
             <img
               src={art.line}
               alt=""
+              aria-hidden="true"
               className="absolute inset-0 block h-full w-full object-cover"
               style={{ maskImage: mask, WebkitMaskImage: mask }}
             />
@@ -75,7 +101,14 @@ export default function DetailView({ art, onClose }: DetailViewProps) {
         </div>
 
         <div className="mt-3 flex items-center gap-3">
-          <div className="h-1 flex-1 bg-edge">
+          <div
+            className="h-1 flex-1 bg-edge"
+            role="progressbar"
+            aria-label="Reveal progress"
+            aria-valuemin={0}
+            aria-valuemax={100}
+            aria-valuenow={Math.round(progress)}
+          >
             <div
               className="h-full bg-accent transition-none"
               style={{ width: `${progress}%` }}
