@@ -7,16 +7,15 @@ Live at [sketch.my.id](https://sketch.my.id).
 
 ## Features
 
-- Click a card (or Tab to it, Enter to open) to watch the full-color version
-  painted over the lineart with an animated mask sweep, plus a progress bar,
-  pause/resume, and a replay button. Escape closes and returns focus.
+- Click a card (or Tab to it, Enter to open). The full-color version paints
+  over the lineart in a mask sweep. A progress bar tracks it, Escape closes
+  and returns focus.
 - The open piece washes its colors behind the grid; closing clears it.
 - Scroll the mouse wheel over the cards to move through the archive
   (pinch-zoom still reaches the browser).
 - Hovering a card fades its colored version into the paper behind the grid.
-- The graph-paper background drops ripple rings under the cursor and breathes
-  gently when you stop moving.
-- One screen, warm paper theme, monospace type.
+- The graph-paper background drops ripple rings under the cursor.
+- One screen. Warm paper, monospace type.
 
 ## Getting started
 
