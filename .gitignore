@@ -2,4 +2,6 @@ node_modules/
 dist/
 .DS_Store
 *.local
-theme-reference/test-results/
+theme-reference/
+test-results/
+playwright-report/
